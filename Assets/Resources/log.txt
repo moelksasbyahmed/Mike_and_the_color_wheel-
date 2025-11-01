@@ -115,3 +115,13 @@ UnityEngine.GUIUtility.ProcessEvent (System.Int32 instanceID, System.IntPtr nati
 
  [2024-05-11 18:01:59]     NullReferenceException: Object reference not set to an instance of an object       won.Start () (at Assets/won.cs:29)
      
+Could not find file "D:\githubs\unities\Mike_and_the_color_wheel-\Assets\Resources\saves.txt"         at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x0019e] in <a3b02d6f9b494355b946095ea1f25c54>:0 
+  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32 bufferSize, System.IO.FileOptions options) [0x00000] in <a3b02d6f9b494355b946095ea1f25c54>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,int,System.IO.FileOptions)
+  at System.IO.StreamReader..ctor (System.String path, System.Text.Encoding encoding, System.Boolean detectEncodingFromByteOrderMarks, System.Int32 bufferSize) [0x00055] in <a3b02d6f9b494355b946095ea1f25c54>:0 
+  at System.IO.StreamReader..ctor (System.String path, System.Text.Encoding encoding, System.Boolean detectEncodingFromByteOrderMarks) [0x00000] in <a3b02d6f9b494355b946095ea1f25c54>:0 
+  at (wrapper remoting-invoke-with-check) System.IO.StreamReader..ctor(string,System.Text.Encoding,bool)
+  at System.IO.File.InternalReadAllText (System.String path, System.Text.Encoding encoding) [0x00000] in <a3b02d6f9b494355b946095ea1f25c54>:0 
+  at System.IO.File.ReadAllText (System.String path) [0x0002c] in <a3b02d6f9b494355b946095ea1f25c54>:0 
+  at menu.Start () [0x00006] in D:\githubs\unities\Mike_and_the_color_wheel-\Assets\ahmed\scripts\menu.cs:109      
+fileExist = false;

@@ -69,12 +69,12 @@ public class menu : MonoBehaviour
 
 
 
-        File.WriteAllText(Path.Combine(Application.dataPath, "Resources/" + "saves.txt"), json);
+        File.WriteAllText(saving.GetSaveFilePath( "saves.txt"), json);
 
         }
         catch(Exception e) {
         
-            File.AppendAllText(Path.Combine(Application.dataPath, "Resources/" + "log.txt"), $"{e.Message}       {e.StackTrace}     \nfileExist = false;\n");
+            File.AppendAllText(saving.GetSaveFilePath( "log.txt"), $"{e.Message}       {e.StackTrace}     \nfileExist = false;\n");
 
         }
 
@@ -106,7 +106,7 @@ public class menu : MonoBehaviour
         try
         {
             pp obj = new pp();
-            obj = JsonUtility.FromJson<pp>(File.ReadAllText(Path.Combine(Application.dataPath, "Resources/" + "saves.txt")));
+            obj = JsonUtility.FromJson<pp>(File.ReadAllText(saving.GetSaveFilePath( "saves.txt")));
             _ = obj.corpsPositions;
             _ = obj.position;
             _ = obj.deathNumber;
@@ -119,11 +119,13 @@ public class menu : MonoBehaviour
         catch (Exception e)
         {
             fileExist = false;
-            File.AppendAllText(Path.Combine(Application.dataPath, "Resources/" + "log.txt"), $"{e.Message}       {e.StackTrace}     \nfileExist = false;\n");
+            File.AppendAllText(saving.GetSaveFilePath( "log.txt"), $"{e.Message}       {e.StackTrace}     \nfileExist = false;\n");
         }
 
         if (!fileExist)
         {
+
+            Debug.Log("the file doesnt exist");
             Continuebutton.interactable = false;
 
         }
@@ -169,7 +171,7 @@ public class menu : MonoBehaviour
         }
         catch (Exception e)
         {
-            File.AppendAllText(Path.Combine(Application.dataPath, "Resources/" + "log.txt"), $"{e.Message}      {e.StackTrace}");
+            File.AppendAllText(saving.GetSaveFilePath( "log.txt"), $"{e.Message}      {e.StackTrace}");
 
         }
     }
@@ -192,7 +194,7 @@ public class menu : MonoBehaviour
         }
         catch (Exception e)
         {
-            File.AppendAllText(Path.Combine(Application.dataPath, "Resources/" + "log.txt"), $"{e.Message}   {e.StackTrace}");
+            File.AppendAllText(saving.GetSaveFilePath( "log.txt"), $"{e.Message}   {e.StackTrace}");
 
         }
 

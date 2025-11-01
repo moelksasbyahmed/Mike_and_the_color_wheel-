@@ -9,7 +9,7 @@ public class Controler : MonoBehaviour
     public static int deathTimes = 0;
     public static bool newSave = true;
     public GameObject deadPlayer;
-    
+
     float timee;
     public void damaged(GameObject whatKilled)
     {
@@ -190,7 +190,11 @@ public class Controler : MonoBehaviour
     public int normalJumpForce;
     void jumpwhilewalking()
     {
-        if (Input.GetKeyDown(KeyCode.Space) &&  /*&& canJump*/  isGrounded)
+        if(MobileInput.jumpPressed)
+        {
+            Debug.Log("it got pressed");
+        }
+        if ((Input.GetKeyDown(KeyCode.Space) || MobileInput.jumpPressed) &&  /*&& canJump*/  isGrounded)
         {
             jump.Play();
 
@@ -238,7 +242,7 @@ public class Controler : MonoBehaviour
     public float upForceWeaker;
     void handleWallJump()
     {
-        if (!isGrounded && Input.GetKeyDown(KeyCode.Space) && walljump.walljumpAvailable)
+        if (!isGrounded && (Input.GetKeyDown(KeyCode.Space) || MobileInput.jumpPressed) && walljump.walljumpAvailable)
         {
             jump.Play();
             walljump.walljumpAvailable = false;
@@ -288,16 +292,22 @@ public class Controler : MonoBehaviour
         }
     }
 
+
     public float airControlSpeed;
     private void HandleMovement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
+
+        if (MobileInput.isMobile)
+        {
+            horizontalInput = MobileInput.horizontal;
+        }
         if (!Mathf.Approximately(horizontalInput, 0f))
         {
 
             transform.localScale = new Vector3 { x = Mathf.Sign(horizontalInput), y = 1f, z = 1f };
         }
-        float speed = (Input.GetKey(KeyCode.LeftShift) && isGrounded) ? runSpeed : (isGrounded) ? walkSpeed : airControlSpeed;
+        float speed = ((Input.GetKey(KeyCode.LeftShift) || MobileInput.runPressed) && isGrounded) ? runSpeed : (isGrounded) ? walkSpeed : airControlSpeed;
         Vector2 movement = new Vector2(horizontalInput * speed, rb.velocity.y);
 
         // Apply smoothing to avoid sudden velocity changes
@@ -331,11 +341,12 @@ public class Controler : MonoBehaviour
     private void UpdateAnimator()
     {
 
-        float horizontalInput = Input.GetAxis("Horizontal") * GetComponent<Transform>().localScale.x;
+        float horizontalInput = ( MobileInput.isMobile?MobileInput.horizontal:Input.GetAxis("Horizontal") ) * GetComponent<Transform>().localScale.x;
 
+    
         bool isWalking = Mathf.Abs(horizontalInput) > 0.001f;
 
-        bool isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking;
+        bool isRunning = (Input.GetKey(KeyCode.LeftShift) || MobileInput.runPressed) && isWalking;
 
         animator.SetBool("walking", isWalking);
 

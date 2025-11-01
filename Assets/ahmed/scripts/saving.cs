@@ -27,16 +27,16 @@ public class saving : ScriptableObject
     //    }
     //}
 
-  
+
 
     public static void InspectComponent(Component component)
     {
-        
+
         Type componentType = component.GetType();
-        
+
         FieldInfo[] fields = componentType.GetFields(BindingFlags.Public | BindingFlags.Instance);
-        Debug.Log( componentType.GetMember("isTrigger")[0]);
-        
+        Debug.Log(componentType.GetMember("isTrigger")[0]);
+
         Debug.Log("im ghere");
         foreach (FieldInfo field in fields)
         {
@@ -52,24 +52,24 @@ public class saving : ScriptableObject
     /// 
 
     //public static float saveTime = 0;
-   static int   numberOfChilds;
+    static int numberOfChilds;
     static List<int> childs = new List<int>();
 
 
     public static float globalAllTime = 0;
-    public static  void realSave(GameObject colorOrbs,GameObject player,string chechName,float time)
+    public static void realSave(GameObject colorOrbs, GameObject player, string chechName, float time)
     {
         childs.Clear();
         numberOfChilds = colorOrbs.transform.childCount;
-        for(int i = 0; i < numberOfChilds; i++)
+        for (int i = 0; i < numberOfChilds; i++)
         {
-         childs.Add(   int.Parse(colorOrbs.transform.GetChild(i).name));
+            childs.Add(int.Parse(colorOrbs.transform.GetChild(i).name));
         }
         GameObject[] deads = GameObject.FindGameObjectsWithTag("dead");
         pp obj = new pp();
         obj.childNumber = numberOfChilds;
         obj.child = childs;
-        obj.position = player.transform.position ;
+        obj.position = player.transform.position;
         obj.deathNumber = Controler.deathTimes;
         obj.newSave = Controler.newSave;
         obj.checkName = chechName;
@@ -82,10 +82,11 @@ public class saving : ScriptableObject
 
         for (int i = 0; i < obj.numberOfCorpses; i++)
         {
-            if (deads[i].transform.parent != null) {
+            if (deads[i].transform.parent != null)
+            {
 
                 obj.corpsPositions.Add(new corpse(deads[i].transform.parent.name, deads[i].transform.position));
-            
+
             }
             else
             {
@@ -100,28 +101,38 @@ public class saving : ScriptableObject
 
 
         Debug.Log("saved this in the file" + obj.newSave + "and this the real value" + Controler.newSave);
-        string json =  JsonUtility.ToJson(obj);
+        string json = JsonUtility.ToJson(obj);
 
 
 
-         File.WriteAllText(Path.Combine(Application.dataPath, "Resources/" + "saves.txt"), json);
+        File.WriteAllText(GetSaveFilePath( "saves.txt"), json);
 
 
     }
 
+    public static string GetSaveFilePath(string filename)
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+    // Android build: use persistentDataPath for read/write
+    return Path.Combine(Application.persistentDataPath, filename);
+#else
+        // PC or Editor: use the same Resources folder for convenience
+        return Path.Combine(Application.dataPath, "Resources", filename);
+#endif
+    }
     public GameObject prefab;
-   public static void realLoad(GameObject colorOrbs,GameObject colorOrbs_prefab, GameObject player)
+    public static void realLoad(GameObject colorOrbs, GameObject colorOrbs_prefab, GameObject player)
     {
         pp obj = new pp();
-        obj = JsonUtility.FromJson<pp>(File.ReadAllText(Path.Combine(Application.dataPath, "Resources/" + "saves.txt")));
+        obj = JsonUtility.FromJson<pp>(File.ReadAllText(GetSaveFilePath( "saves.txt")));
         GameObject tewmp = player.GetComponent<Controler>().deadPlayer;
-        
+
         for (int i = 0; i < obj.numberOfCorpses; i++)
         {
-            if(obj.corpsPositions[i].Item1 != "null")
+            if (obj.corpsPositions[i].Item1 != "null")
             {
 
-            Instantiate(tewmp, obj.corpsPositions[i].Item2, Quaternion.identity,GameObject.Find( obj.corpsPositions[i].Item1).transform);
+                Instantiate(tewmp, obj.corpsPositions[i].Item2, Quaternion.identity, GameObject.Find(obj.corpsPositions[i].Item1).transform);
             }
             else
             {
@@ -132,7 +143,7 @@ public class saving : ScriptableObject
 
         }
 
-       
+
 
 
         player.transform.position = obj.position;
@@ -140,26 +151,26 @@ public class saving : ScriptableObject
         menu.hardCoreBool = obj.hardCore;
 
         allTimee = obj.allTime;
-        
+
 
 
 
         Controler.deathTimes = obj.deathNumber;
         Controler.newSave = obj.newSave;
         CheckPoint.lastCheckPoint = GameObject.Find(obj.checkName);
-      GameObject x =  Instantiate(colorOrbs_prefab);
+        GameObject x = Instantiate(colorOrbs_prefab);
         x.name = "color orbs";
         ColorManager.CollectedColors.Clear();
         ColorManager.newCollectedColors.Clear();
-       // ColorManager.lighte.color = Color.black;//some bug in this area
-        for (int i = 0;i <7;i++)
+        // ColorManager.lighte.color = Color.black;//some bug in this area
+        for (int i = 0; i < 7; i++)
         {
-            if(!obj.child.Exists(item => item == i))
+            if (!obj.child.Exists(item => item == i))
             {
                 Debug.Log("int the loop to add colors" + i);
-                ColorManager.newColor(x.transform.GetChild(7-i-1).GetComponent<SpriteRenderer>().color);
-                Debug.Log("added "+ x.transform.GetChild(7 - i - 1).GetComponent<SpriteRenderer>().color);
-                Destroy(x.transform.GetChild(7 - i -1).gameObject);
+                ColorManager.newColor(x.transform.GetChild(7 - i - 1).GetComponent<SpriteRenderer>().color);
+                Debug.Log("added " + x.transform.GetChild(7 - i - 1).GetComponent<SpriteRenderer>().color);
+                Destroy(x.transform.GetChild(7 - i - 1).gameObject);
 
             }
 
@@ -170,30 +181,30 @@ public class saving : ScriptableObject
 
     public static double allTimee;
     public static void save(GameObject gameobject, GameObject empty)
+    {
+        GameObject nw = Instantiate(empty);
+        Component[] components = gameobject.GetComponents(typeof(Component));
+        foreach (Component component in components)
+        {
+            Debug.Log(component.ToString());
+            if (nw.GetComponent(component.GetType()) == null)
             {
-                GameObject nw = Instantiate(empty);
-                Component[] components = gameobject.GetComponents(typeof(Component));
-                foreach (Component component in components)
-                {
-                    Debug.Log(component.ToString());
-                    if (nw.GetComponent(component.GetType()) == null)
-                    {
-                        Component newComponent = nw.AddComponent(component.GetType());
-                        dynamic x = gameobject.GetComponent(component.GetType());
+                Component newComponent = nw.AddComponent(component.GetType());
+                dynamic x = gameobject.GetComponent(component.GetType());
                 InspectComponent(x);
-                       // Debug.Log(x.isTrigger);
-                        //this is working u can get the properities by its names from the original component then save it, then load it again and do the reverse to aplply the properities and u can use (dynamic properity fitcher ) o get all the properities
-                    }
-                    else
-                    {
-
-                        Debug.Log("f;u");
-                    }
-
-                }
-
+                // Debug.Log(x.isTrigger);
+                //this is working u can get the properities by its names from the original component then save it, then load it again and do the reverse to aplply the properities and u can use (dynamic properity fitcher ) o get all the properities
             }
+            else
+            {
+
+                Debug.Log("f;u");
+            }
+
         }
+
+    }
+}
 [Serializable]
 class pp
 {
@@ -202,7 +213,7 @@ class pp
     public int deathNumber;
     public bool newSave;
     public string checkName;
-   public List<int> child;
+    public List<int> child;
 
 
 
