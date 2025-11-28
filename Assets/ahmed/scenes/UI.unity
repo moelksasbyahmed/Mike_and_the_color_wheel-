@@ -1249,6 +1249,7 @@ GameObject:
   - component: {fileID: 635814687}
   - component: {fileID: 635814686}
   - component: {fileID: 635814689}
+  - component: {fileID: 635814690}
   m_Layer: 5
   m_Name: jumpButton
   m_TagString: Untagged
@@ -1414,6 +1415,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &635814690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635814684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865875bee3ebaab4182cb5747c07b17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &899384317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,6 +1440,7 @@ GameObject:
   - component: {fileID: 899384320}
   - component: {fileID: 899384319}
   - component: {fileID: 899384322}
+  - component: {fileID: 899384323}
   m_Layer: 5
   m_Name: left button
   m_TagString: Untagged
@@ -1592,6 +1606,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &899384323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899384317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865875bee3ebaab4182cb5747c07b17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &965477496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,6 +1679,7 @@ GameObject:
   - component: {fileID: 1189549831}
   - component: {fileID: 1189549830}
   - component: {fileID: 1189549833}
+  - component: {fileID: 1189549834}
   m_Layer: 5
   m_Name: run button
   m_TagString: Untagged
@@ -1818,6 +1845,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1189549834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189549828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865875bee3ebaab4182cb5747c07b17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1203028561
 GameObject:
   m_ObjectHideFlags: 0
@@ -1831,6 +1870,7 @@ GameObject:
   - component: {fileID: 1203028564}
   - component: {fileID: 1203028563}
   - component: {fileID: 1203028566}
+  - component: {fileID: 1203028567}
   m_Layer: 5
   m_Name: right button
   m_TagString: Untagged
@@ -1996,6 +2036,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1203028567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203028561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865875bee3ebaab4182cb5747c07b17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1210842351
 GameObject:
   m_ObjectHideFlags: 0

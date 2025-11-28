@@ -1,1 +1,1 @@
-{"position":{"x":1.2999999523162842,"y":-0.5099999904632568,"z":0.0},"childNumber":0,"deathNumber":0,"newSave":true,"checkName":"","child":[0,1,2,3,4,5,6],"numberOfCorpses":0,"corpsPositions":[],"hardCore":false,"allTime":0.0,"enableSaving":true}
+{"position":{"x":7.317580223083496,"y":-0.5126882195472717,"z":0.0},"childNumber":6,"deathNumber":0,"newSave":false,"checkName":"Table1 (1)","child":[6,5,4,3,2,1],"numberOfCorpses":0,"corpsPositions":[],"hardCore":false,"allTime":3.6035008430480959,"enableSaving":false}
